@@ -6,6 +6,7 @@ use _64FF00\PureChat\factions\FactionsInterface;
 use _64FF00\PureChat\factions\FactionsProNew;
 use _64FF00\PureChat\factions\FactionsProOld;
 use _64FF00\PureChat\factions\XeviousPE_Factions;
+use _64FF00\PureChat\factions\factionsZ;
 use _64FF00\PurePerms\PPGroup;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -381,7 +382,15 @@ class PureChat extends PluginBase
                     $this->getLogger()->notice("No valid factions plugin in default-factions-plugin node was found. Disabling factions plugin support.");
 
                     break;
+                case "factionsz":
+                    if($this->getServer()->getPluginManager()->getPlugin("factionsZ") !== null)
+                    {
+                        $this->factionsAPI = new factionsZ();
 
+                        $this->getLogger()->notice("factionsZ support enabled.");
+
+                        break;
+                    }
                 default:
 
                     $this->getLogger()->notice("No valid factions plugin in default-factions-plugin node was found. Disabling factions plugin support.");
