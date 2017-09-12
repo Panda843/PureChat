@@ -28,16 +28,22 @@ class factionsZ implements FactionsInterface
      */
     public function getPlayerFaction(Player $player)
     {
-        return $this->getAPI()->dataProvider->getFaction($player->getName());
+		$provider = $this->getAPI();
+		$player_name = $player->getName();
+		if(!$provider->isInFaction($player_name))
+		{
+			return '';
+		}
+        return $provider->getFaction($player_name);
     }
     /**
      * @param Player $player
      * @return string
      */
-    public function getPlayerRank(Player $player)
+	public function getPlayerRank(Player $player)
     {
+		$provider = $this->getAPI();
 		$player_name = $player->getName();
-        $provider = $this->getAPI()->dataProvider;
 		if($provider->isInFaction($player_name))
 		{
 			if($provider->getRank($player_name) == "Officer") 
@@ -53,6 +59,6 @@ class factionsZ implements FactionsInterface
 				return '';
 			}
 		}
-        return '';
+		return '';
     }
 }
